@@ -1,0 +1,6 @@
+Josito:García:CuatroQuesos:1
+Juanito:López:Margarita:2
+Julián:Fernández:Carbonara:4
+Pepito:Martínez:Pepperoni:5
+Menganito:González:Champiñon:6
+Jaimito:Sánchez:Barbacoa:10

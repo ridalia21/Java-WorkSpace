@@ -1,0 +1,47 @@
+<%@ page import="Hoteles.HotelesPrecios"%>
+<%@ page import="java.time.*"%>
+<%@ page import="Hoteles.HotelesClass"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Reserva hoteles</title>
+</head>
+<body>
+	<h2>Reserva de hoteles</h2>
+	<form action="procesaHoteles.jsp" method="post">
+		<p>DNI de la reserva</p>
+		<input type="text" maxlength="9" name="dni" required>
+		<p>Fecha de entrada</p>
+		<input type="date" name="Fentrada" min="<%=LocalDate.now().plusDays(1)%>">
+		<p>Fecha de salida</p>
+		<input type="date" name="Fsalida" min="<%=LocalDate.now().plusDays(2)%>"> <br>
+		<p>Elija un hotel</p>
+		<select id="selc">
+			<%
+			for (int i = 0; i < HotelesPrecios.mishoteles.length; i++) {
+			%>
+				<option id="opt" value="<%=HotelesPrecios.mishoteles[i] %>"><%=HotelesPrecios.mishoteles[i] %></option>
+			<%
+			}
+			%>
+		</select>
+		<h3>Tipo de alojamiento</h3>
+		<%
+		for (int i = 0; i < HotelesPrecios.tipo.length; i++) {
+		%>
+		<input type="radio" name="<%=HotelesPrecios.tipo[i]%>"
+			value="<%=HotelesPrecios.tipo[i]%>">
+		<%=HotelesPrecios.tipo[i]%><br>
+		<%
+		}
+		%>
+		<h3>Extras</h3>
+		<input type="checkbox" name="CB1" value="Garaje">Garaje<br>
+		<input type="checkbox" name="CB2" value="Sauna">Sauna<br>
+		<br><input type="submit" name="enviar" value="Enviar">
+	</form>
+</body>
+</html>

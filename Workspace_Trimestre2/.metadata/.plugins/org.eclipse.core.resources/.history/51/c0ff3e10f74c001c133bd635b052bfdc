@@ -1,0 +1,31 @@
+package modelo;
+
+public class Usuario {
+	private String login;
+	private String passw;
+	/*
+	 * Esto debe ser enumerado para que sea más sencillo trabajar con ello
+	 */
+	private String tipo;
+	
+	
+	
+	public Usuario(String login, String passw) {
+		this.login = login;
+		this.passw = passw;
+		this.tipo = "N";
+	}
+
+	public Usuario(String login, String passw, String tipo) {
+		this.login = login;
+		this.passw = passw;
+		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "login=" + login + ", passw=" + passw + ", tipo=" + tipo + "]";
+	}
+	
+	
+}

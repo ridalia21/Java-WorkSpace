@@ -1,0 +1,15 @@
+package modelo;
+
+public class Palabras {
+
+	private String palabra;
+	private int votos;
+	
+	public Palabras(String palabra, int votos) {
+		super();
+		this.palabra = palabra;
+		this.votos = votos;
+	}
+	
+	
+}

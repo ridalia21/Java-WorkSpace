@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Página de registro</title>
+</head>
+<body>
+	<form action="controlRegistro" method="post">
+		<p>El caracter ":" no puede formar parte ni del login ni del passw</p>
+		<p>Usuario: <input type="text" name="usr" pattern="[^:]+" required></p>
+		<p>Contraseña: <input type="password" name="passw" pattern="[^:]+" required></p>
+		<p><input type="submit" id="enviar" name="enviar" value="Enviar"></p>
+	</form>
+</body>
+</html>

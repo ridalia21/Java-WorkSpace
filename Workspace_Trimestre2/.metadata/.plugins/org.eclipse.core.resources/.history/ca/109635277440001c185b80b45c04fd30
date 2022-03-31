@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="modelo.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+	Contacto c1 = new Contacto("Pepe");
+	if (!c1.agregaMail("pepe@rewr.es")) {
+		out.print("<p>ya estaba agregado</p>");
+	}
+	if (!c1.agregaMail("pepe@yahoo.es")) {
+		out.print("<p>ya estaba agregado</p>");
+	}
+	if (!c1.agregaTfno("914324325")) {
+		out.print("<p>ya estaba agregado</p>");
+	}
+
+	out.print("<p>" + c1 + "</p>");
+
+	if (!c1.eliminaMail("pepe@rewr.es")) {
+		out.print("<p>No estaba agregado</p>");
+	}
+
+	out.print("<p>" + c1 + "</p>");
+	%>
+</body>
+</html>

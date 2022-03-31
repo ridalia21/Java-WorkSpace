@@ -1,0 +1,3 @@
+2021-11-22T08:50:03.498059600;Eduardo;cinefilo;la peli estuvo guay
+2021-11-22T08:50:39.406747500;Juan;cinefilo;A mi tambiÃ©n me gustÃ³ la peli
+2021-11-22T09:54:13.762610900;bybyy;cinefilo;bien

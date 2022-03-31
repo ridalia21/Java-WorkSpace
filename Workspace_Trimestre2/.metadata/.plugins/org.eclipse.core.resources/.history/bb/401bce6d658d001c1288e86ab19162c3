@@ -1,0 +1,40 @@
+package modelo;
+
+public class Palabras {
+
+	private String palabra;
+	private int votos;
+	
+	public Palabras(String palabra, int votos) {
+		super();
+		this.palabra = palabra;
+		this.votos = votos;
+	}
+
+	public String getPalabra() {
+		return palabra;
+	}
+
+	public void setPalabra(String palabra) {
+		this.palabra = palabra;
+	}
+
+	public int getVotos() {
+		return votos;
+	}
+
+	public void setVotos(int votos) {
+		this.votos = votos;
+	}
+
+	public String resul() {
+		return palabra + ":" + votos";
+	}
+	
+	@Override
+	public String toString() {
+		return "Palabras [palabra=" + palabra + ", votos=" + votos + "]";
+	}
+	
+	
+}

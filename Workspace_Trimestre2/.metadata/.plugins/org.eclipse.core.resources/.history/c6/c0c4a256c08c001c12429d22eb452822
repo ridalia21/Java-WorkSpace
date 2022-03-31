@@ -1,0 +1,78 @@
+package controlador;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.Connection;
+
+import modelo.Especialidad;
+import utilidades.ConectarViejaFormula;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ResuelveBusqueda")
+public class ResuelveBusqueda extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private int horas;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String hs = request.getParameter("horas");
+		String lvl = request.getParameter("rad");
+
+		try {
+			horas = Integer.parseInt(hs);
+		} catch (Exception e) {
+			System.out.println();
+		}
+		ConectarViejaFormula c = new ConectarViejaFormula("instituto");
+		String query;
+		Connection conexion = c.getConexion();
+		try {
+			if (hs.trim().isEmpty() && lvl.trim().isEmpty()) {
+				query = "select * from especialidades";
+			} else if (!hs.trim().isEmpty()) {
+				query = "select * from especialidades where horas >=" + horas + " order by horas desc";
+			} else if (lvl.equals("basico") || lvl.equals("medio") || lvl.equals("superior")) {
+				query = "SELECT * FROM `especialidades` WHERE nivel = \"" + lvl + "\"";
+			} else
+				query = "select * from especialidades where horas >=" + horas + " and nivel = \"" + lvl + "\"";
+
+			addInfoBBDD(request, response, c, conexion, query);
+		} catch (Exception e) {
+			request.setAttribute("error", "Error en los datos");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+		// Empezamos conexion
+		// ConectarViejaFormula c = new ConectarViejaFormula("instituto");
+		// Connection conexion = c.getConexion();
+	}
+
+	private void addInfoBBDD(HttpServletRequest request, HttpServletResponse response, ConectarViejaFormula c,
+			Connection conexion, String query) {
+		ArrayList<Especialidad> listaR = new ArrayList<Especialidad>();
+		try {
+			Statement s = (Statement) conexion.createStatement();
+			ResultSet rs = s.executeQuery(query);
+			while (rs.next()) {
+				int ident = rs.getInt("id");
+				String nb = rs.getString("nombre");
+				String nv = rs.getString("nivel");
+				int h = rs.getInt("horas");
+				Especialidad esp = new Especialidad(ident, nb, h, nv);
+				listaR.add(esp);
+			}
+			c.desconectar();
+			request.setAttribute("lista", listaR);
+			request.getRequestDispatcher("vista1.jsp").forward(request, response);
+		} catch (Exception ex) {
+			System.out.println("No se puede ligar una sentencia a la conexión");
+			ex.printStackTrace();
+		}
+	}
+}

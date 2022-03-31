@@ -1,0 +1,6 @@
+package modelo;
+
+public class Palabras {
+
+	private String palabra;
+}

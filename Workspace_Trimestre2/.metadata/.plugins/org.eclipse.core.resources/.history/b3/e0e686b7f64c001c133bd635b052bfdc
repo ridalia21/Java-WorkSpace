@@ -1,0 +1,10 @@
+package modelo;
+
+public class Usuario {
+	private String login;
+	private String passw;
+	private int tipo;
+	/*
+	 * Esto debe ser enumerado para que sea más sencillo trabajar con ello
+	 */
+}

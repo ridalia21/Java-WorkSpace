@@ -1,0 +1,13 @@
+package modelo;
+
+public class Tablero {
+	private int filas;
+	private String color1;
+	private String color2;
+
+	public Tablero(int filas, String color1, String color2) {
+		this.filas = filas;
+		this.color1 = "white";
+		this.color2 = "black";
+	}
+}

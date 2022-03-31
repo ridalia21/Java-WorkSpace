@@ -1,0 +1,50 @@
+package controlador;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import modelo.Alumno;
+
+/**
+ * Servlet implementation class CrearSesion
+ */
+@WebServlet("/CrearSesion")
+public class CrearSesion extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String dni;
+	private String nombre;
+	private String nota;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		nombre = request.getParameter("nombre").trim();
+		dni = request.getParameter("dni").trim();
+		nota = request.getParameter("nota");
+		int nt = Integer.parseInt(nota);
+		
+		if (!nombre.isEmpty() && !dni.isEmpty()) {// datos son correctos
+			ArrayList<Alumno> listado = new ArrayList<Alumno>();
+			
+			HttpSession sesion = (HttpSession) request.getSession(true);
+			// atributo que vamos a meter en la sesion ser� listadoAlCal
+			if (sesion.getAttribute("listadoAlCal") != null) {// ya estaba en la sesion
+				listado = (ArrayList<Alumno>) sesion.getAttribute("listadoAlCal");
+				System.out.println("ya existia algun alumno calificado");
+			} else {
+				System.out.println("no  existia la variable de sesion");
+			}
+			listado.add(new Alumno(dni, nombre, nt));
+			sesion.setAttribute("listadoAlCal", listado);
+
+		}
+		response.sendRedirect("index.jsp");
+
+	}
+
+}

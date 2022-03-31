@@ -1,0 +1,59 @@
+package controlador;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.Archivo;
+import modelo.Usuario;
+
+@WebServlet("/controlAcceso")
+public class controlAcceso extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String login;
+	private String passw;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		login = request.getParameter("usr").trim();
+		passw = request.getParameter("passw").trim();
+		String mensaje = "Algún campo estaba vacío";
+		if (login.isEmpty() || passw.isEmpty()) {
+			request.setAttribute("m1", mensaje);
+			request.getRequestDispatcher("Index.jsp").forward(request, response);
+		} else {
+			/*
+			 * Tengo que buscar en el fichero si existe una línea con esos datos
+			 */
+			String ruta = getServletContext().getRealPath("/")+"archivos/Claves.txt";
+			Archivo a = new Archivo(ruta);
+			ArrayList<String> misDatos = a.leerFichero();
+			Usuario U1 = new Usuario(login, passw);
+			String sw = busca(misDatos,U1);
+			request.setAttribute("tipo", sw);
+			switch (sw) {
+			case "A":
+				
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	private String busca(ArrayList<String> misDatos, Usuario u1) {
+		String buscado = u1.getLogin()+":"+u1.getPassw();
+		for (String usuario : misDatos) {
+			if (usuario.indexOf(buscado) >= 0) {
+				return usuario.substring(usuario.length()-1);
+			}
+		}
+		return "Z";//Es el retorno de no encontrado
+	}
+
+}

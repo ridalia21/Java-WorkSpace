@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TablasNumeros</title>
+</head>
+<body>
+
+<%
+int n1 = (int)(Math.random()*15)+1;
+int n2 = (int)(Math.random()*15)+1;
+%>
+
+<p><%=n1 %></p>
+<p><%=n2 %></p>
+
+<%
+for (int n1; n1<=n2; n1++) {
+	
+}
+%>
+
+</body>
+</html>

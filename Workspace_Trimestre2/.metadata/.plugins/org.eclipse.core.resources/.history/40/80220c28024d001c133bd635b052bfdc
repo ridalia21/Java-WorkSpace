@@ -1,0 +1,64 @@
+package controlador;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.Archivo;
+import modelo.Usuario;
+
+@WebServlet("/controlRegistro")
+public class controlRegistro extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String login;
+	private String passw;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		login = request.getParameter("usr").trim();
+		passw = request.getParameter("passw").trim();
+		String mensaje = "Algún campo estaba vacío";
+		if (login.isEmpty() || passw.isEmpty()) {
+			request.setAttribute("m1", mensaje);
+			request.getRequestDispatcher("registro.jsp").forward(request, response);
+		} else {
+			Usuario U1 = new Usuario(login, passw);
+			if (!U1.evaluaClave()) {
+				mensaje = "La clave no cumple las condiciones, crea otra";
+				request.setAttribute("m1", mensaje);
+				request.getRequestDispatcher("registro.jsp").forward(request, response);
+			} else {
+				/*
+				 * Tengo que buscar en el fichero si existe una línea con esos datos
+				 */
+				String ruta = getServletContext().getRealPath("/")+"archivos/Claves.txt";
+				Archivo a = new Archivo(ruta);
+				ArrayList<String> misDatos = a.leerFichero();
+				boolean sw = buscaUser(misDatos, login);
+				if (sw) {
+					mensaje = "Esa login ya ha sido usada, prueba con otra";
+					request.setAttribute("m1", mensaje);
+					request.getRequestDispatcher("registro.jsp").forward(request, response);
+				} else {
+					a.escribirLinea(ruta, sw);
+				}
+			}
+		}
+	}
+
+	private boolean buscaUser(ArrayList<String> misDatos, String login2) {
+		String[] registro;
+		for (String log : misDatos) {
+			registro = log.split(":");
+			if (registro[0].equals(login2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+}

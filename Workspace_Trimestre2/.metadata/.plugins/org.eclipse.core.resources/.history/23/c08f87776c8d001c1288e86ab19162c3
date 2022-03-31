@@ -1,0 +1,74 @@
+package modelo;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Connection;
+import utilidades.ConectarV;
+
+public class DAO {
+
+	private Connection conexion;
+
+	public DAO(String base) {
+		ConectarV c = new ConectarV(base);
+		this.conexion = c.getConexion();
+	}
+
+	private void desconectar() throws SQLException {
+		this.conexion.close();
+	}
+
+	public ArrayList<Palabras> buscar () throws SQLException { 
+		ArrayList<Palabras> p = new ArrayList<Palabras>(); 
+		
+		String query = "SELECT * FROM palabras";
+		System.out.println(query);
+		PreparedStatement s;
+		s = this.conexion.prepareStatement(query);
+		ResultSet rs = s.executeQuery();
+		
+		while (rs.next()) {
+			p.add(new Palabras(rs.getString(1), rs.getInt(2))); 
+		}
+		
+		rs.close();
+		desconectar();
+		return p;
+	}
+	
+	 public void registrar(String campo1) throws SQLException {
+		String query = "INSERT INTO palabras (palabra, votos) VALUES (?, 0)";
+		System.out.println(query);
+		PreparedStatement s;
+		try {
+			s = this.conexion.prepareStatement(query);
+			s.setString(1, campo1);
+			int filas = s.executeUpdate();
+			System.out.println(filas);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		desconectar();
+	 }
+	 
+	/* 
+	public int insertarNoticia(Noticia n) throws SQLException {
+		int insert;
+		String query = "INSERT INTO `noticias` (`titulo`, `fecha`, `usuarioEditor`, `cuerpoNoticia`) VALUES (?, ?, ?, ?);";
+		PreparedStatement s = this.conexion.prepareStatement(query);
+		s.setString(1, n.getTitulo());
+		s.setDate(2, Date.valueOf(n.getFecha()));
+		s.setString(3, n.getUsuarioEditor());
+		s.setString(4, n.getCuerpo());
+
+		insert = s.executeUpdate();
+		s.close();
+		desconectar();
+		return insert;
+	}
+	*/
+}

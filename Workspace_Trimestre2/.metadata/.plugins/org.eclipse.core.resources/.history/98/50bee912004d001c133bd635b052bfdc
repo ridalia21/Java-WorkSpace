@@ -1,0 +1,55 @@
+package modelo;
+
+public class Usuario {
+	private String login;
+	private String passw;
+	/*
+	 * Esto debe ser enumerado para que sea más sencillo trabajar con ello
+	 */
+	private String tipo;
+	
+	public Usuario(String login, String passw) {
+		this.login = login;
+		this.passw = passw;
+		this.tipo = "N";
+	}
+
+	public Usuario(String login, String passw, String tipo) {
+		this.login = login;
+		this.passw = passw;
+		this.tipo = tipo;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public String getPassw() {
+		return passw;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassw(String passw) {
+		this.passw = passw;
+	}
+
+	public boolean evaluaClave () {
+		if (this.passw.length()) {
+			
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return login + ":" + passw + ":" + tipo;
+	}
+	
+}

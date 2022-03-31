@@ -1,0 +1,25 @@
+<%@page import="modelo.Tablero"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style type="text/css">
+		div {
+			width: 40px; height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<%
+	Tablero t = (Tablero) request.getAttribute("miTablero");
+	for (int fil = 0; fil < t.getFilas(); fil++) {
+		for (int col = 0; col < t.getFilas(); col++) {
+
+		}
+	}
+	%>
+</body>
+</html>

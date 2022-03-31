@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.time.*, java.time.temporal.ChronoUnit" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>procesaHoteles</title>
+</head>
+<body>
+<%
+LocalDate Fent = LocalDate.parse(getParameter("Fentrada"));
+%>
+	<p>Dni de la reserva: <%=request.getParameter("dni") %></p>
+	<p>Fecha de llegada: <%= %></p>
+	<p>Fecha de salida: <%= %></p>
+	<p>Días reservados para la estancia: <%= %></p>
+	<p>Hotel en el que me hospedo: <%= %></p>
+	
+	
+	<a href="ReservaHoteles.jsp">Volver a la reserva</a>
+</body>
+</html>

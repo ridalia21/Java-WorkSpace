@@ -1,0 +1,37 @@
+package controlador;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import modelo.DAO;
+import modelo.Palabras;
+
+@WebServlet("/addPalabra")
+public class addPalabra extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	private String palabra;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DAO d = new DAO("encuesta");
+		if (request.getParameter("palNueva") != null && !request.getParameter("palNueva").trim().isEmpty()) {
+			palabra = request.getParameter("palNueva").toLowerCase();
+		}
+		try {
+			ArrayList<Palabras> p = (ArrayList<Palabras>) d.buscar();
+			Strint[] encuesta; 
+			for (Palabras pals : p) {
+				
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+}

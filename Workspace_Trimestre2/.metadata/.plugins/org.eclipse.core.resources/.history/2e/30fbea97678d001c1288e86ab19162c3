@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="modelo.*, java.util.*" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+	ArrayList<Palabras> especialidades = (ArrayList<AlumnoEspecialidad>) request.getAttribute("tablaAlumEspecialidades");
+
+	if (especialidades.size() == 0) {
+		out.print("<h1>No hay coincidencias especialidades</h1>");
+	} else {
+
+		for (int i = 0; i < especialidades.size(); i++) {
+	%>
+	<p><%=especialidades.get(i)%></p>
+	<%
+	}
+	}
+	%>
+	<p>
+		<a href="index.jsp">Nueva búsqueda</a>
+	</p>
+</body>
+</html>

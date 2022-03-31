@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cita Médico</title>
+</head>
+<body>
+	<form action="" method="get">
+		<p>Fecha</p>
+		<input type="date" name="date" />
+		<p>Hora</p>
+		<input type="time" name="time" min="12:00" max="16:00" step="600"/> 
+		<br><br>
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+</body>
+</html>

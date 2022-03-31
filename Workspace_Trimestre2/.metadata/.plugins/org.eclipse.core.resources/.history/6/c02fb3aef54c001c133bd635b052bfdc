@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="LoginConFicheros">
+        <property name="context-root" value="LoginConFicheros"/>
+        <property name="java-output-path" value="/LoginConFicheros/build/classes"/>
+    </wb-module>
+</project-modules>

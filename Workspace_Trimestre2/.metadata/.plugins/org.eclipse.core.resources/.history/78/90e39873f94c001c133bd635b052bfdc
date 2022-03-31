@@ -1,0 +1,24 @@
+package controlador;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/controlAcceso")
+public class controlAcceso extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String login;
+	private String passw;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		login = request.getParameter("usr").trim();
+		passw = request.getParameter("passw").trim();
+		if (login.isEmpty() || passw.isEmpty()) {
+			
+		}
+	}
+
+}

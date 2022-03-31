@@ -1,0 +1,5 @@
+Patrón de arquitectura -> MVC -> Patrón de diseño -> Fatory
+clase Figura(abstracta, la fábrica de obj; crea obj concretos no abstractos)
+			finalidad --> generar herencia
+clase FabricaFigura --> q contruya obj concretos 
+clase de obj: objetos concretos que derivan de figura
